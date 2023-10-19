@@ -1,6 +1,6 @@
 <?php 
-$pag = "professores";
-require_once("../conexao.php"); 
+$pag = "gestores";
+require_once("../connect.php"); 
 
 @session_start();
     //verificar se o usuário está autenticado
@@ -41,7 +41,7 @@ if(@$_SESSION['id_usuario'] == null || @$_SESSION['nivel_usuario'] != 'Admin'){
 
                  <?php 
 
-                 $query = $pdo->query("SELECT * FROM professores order by id desc ");
+                 $query = $pdo->query("SELECT * FROM gestores order by id desc ");
                  $res = $query->fetchAll(PDO::FETCH_ASSOC);
 
                  for ($i=0; $i < count($res); $i++) { 
@@ -65,7 +65,7 @@ if(@$_SESSION['id_usuario'] == null || @$_SESSION['nivel_usuario'] != 'Admin'){
                     <td><?php echo $telefone ?></td>
                     <td><?php echo $email ?></td>
                     <td><?php echo $cpf ?></td>
-                    <td><img src="../img/professores/<?php echo $foto ?>" width="50"></td>
+                    <td><img src="../img/gestores/<?php echo $foto ?>" width="50"></td>
 
 
                     <td>
@@ -101,7 +101,7 @@ if(@$_SESSION['id_usuario'] == null || @$_SESSION['nivel_usuario'] != 'Admin'){
                     $titulo = "Editar Registro";
                     $id2 = $_GET['id'];
 
-                    $query = $pdo->query("SELECT * FROM professores where id = '" . $id2 . "' ");
+                    $query = $pdo->query("SELECT * FROM gestores where id = '" . $id2 . "' ");
                     $res = $query->fetchAll(PDO::FETCH_ASSOC);
 
                     $nome2 = $res[0]['nome'];
@@ -174,9 +174,9 @@ if(@$_SESSION['id_usuario'] == null || @$_SESSION['nivel_usuario'] != 'Admin'){
 
                             <div id="divImgConta">
                             <?php if(@$foto2 != ""){ ?>
-                                <img src="../img/professores/<?php echo $foto2 ?>" width="200" height="200" id="target">
+                                <img src="../img/gestores/<?php echo $foto2 ?>" width="200" height="200" id="target">
                             <?php  }else{ ?>
-                                <img src="../img/professores/sem-foto.jpg" width="200" height="200" id="target">
+                                <img src="../img/gestores/sem-foto.jpg" width="200" height="200" id="target">
                             <?php } ?>
                             </div>
                 </div>
@@ -270,7 +270,7 @@ if(@$_SESSION['id_usuario'] == null || @$_SESSION['nivel_usuario'] != 'Admin'){
 
                     $id2 = $_GET['id'];
 
-                    $query = $pdo->query("SELECT * FROM professores where id = '$id2' ");
+                    $query = $pdo->query("SELECT * FROM gestores where id = '$id2' ");
                     $res = $query->fetchAll(PDO::FETCH_ASSOC);
                     $nome3 = $res[0]['nome'];
                     $cpf3 = $res[0]['cpf'];
@@ -290,7 +290,7 @@ if(@$_SESSION['id_usuario'] == null || @$_SESSION['nivel_usuario'] != 'Admin'){
                             <span><b>Endereço: </b> <i><?php echo $endereco3 ?><br>
 
                                 <div class="mt-2" align="center">
-                                <img src="../img/professores/<?php echo $foto3 ?>" width="250px">
+                                <img src="../img/gestores/<?php echo $foto3 ?>" width="250px">
                                 </div>
 
                             </div>
