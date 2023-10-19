@@ -4,7 +4,7 @@ if(@$_SESSION['nivel_usuario'] == null || @$_SESSION['nivel_usuario'] != 'Admin'
 	echo "<script language='javascript'> window.location='../index.php' </script>";
 }
 
-require_once("../conexao.php"); 
+require_once("../connect.php"); 
 
 
 //totais dos cards

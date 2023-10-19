@@ -1,6 +1,6 @@
 <?php 
 $pag = "motoristas";
-require_once("../conexao.php"); 
+require_once("../connect.php"); 
 
 @session_start();
     //verificar se o usuário está autenticado

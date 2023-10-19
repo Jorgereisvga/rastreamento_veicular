@@ -1,5 +1,5 @@
 <?php 
-require_once("conexao.php");
+require_once("connect.php");
 
 //CRIAR AUTOMATICAMENTE O USUARIO ADMIN
 $query = $pdo->query("SELECT * FROM usuarios where nivel = 'admin'");

@@ -1,6 +1,6 @@
 <?php 
     @session_start();
-    require_once("../conexao.php"); 
+    require_once("../connect.php"); 
 
     //variaveis para o menu
     $pag = @$_GET["pag"];

@@ -1,6 +1,6 @@
 <?php 
 $pag = "salas";
-require_once("../conexao.php"); 
+require_once("../connect.php"); 
 
 @session_start();
     //verificar se o usuário está autenticado

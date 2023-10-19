@@ -1,5 +1,5 @@
 <?php 
-require_once("conexao.php");
+require_once("connect.php");
 @session_start();
 
 $email = $_POST['email'];

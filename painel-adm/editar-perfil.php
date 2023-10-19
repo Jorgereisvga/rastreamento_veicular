@@ -1,5 +1,5 @@
 <?php 
-require_once("../conexao.php"); 
+require_once("../connect.php"); 
 
 $nome = $_POST['nome_usu'];
 $cpf = $_POST['cpf_usu'];
