@@ -1,28 +1,22 @@
 <?php 
-$pag = "tesoureiros";
-require_once("../conexao.php"); 
+    $pag = "mecanicos";
+    require_once("../connect.php"); 
 
-@session_start();
-    //verificar se o usuário está autenticado
-if(@$_SESSION['id_usuario'] == null || @$_SESSION['nivel_usuario'] != 'Admin'){
-    echo "<script language='javascript'> window.location='../index.php' </script>";
+    @session_start();
+        //verificar se o usuário está autenticado
+    if(@$_SESSION['id_usuario'] == null || @$_SESSION['nivel_usuario'] != 'Admin'){
+        echo "<script language='javascript'> window.location='../index.php' </script>";
 
-}
-
-
+    }
 ?>
 
 <div class="row mt-4 mb-4">
-    <a type="button" class="btn-info btn-sm ml-3 d-none d-md-block" href="index.php?pag=<?php echo $pag ?>&funcao=novo">Novo Tesoureiro</a>
+    <a type="button" class="btn-info btn-sm ml-3 d-none d-md-block" href="index.php?pag=<?php echo $pag ?>&funcao=novo">Novo Mecânico</a>
     <a type="button" class="btn-info btn-sm ml-3 d-block d-sm-none" href="index.php?pag=<?php echo $pag ?>&funcao=novo">+</a>
     
 </div>
-
-
-
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
-
     <div class="card-body">
         <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -37,84 +31,61 @@ if(@$_SESSION['id_usuario'] == null || @$_SESSION['nivel_usuario'] != 'Admin'){
                 </thead>
 
                 <tbody>
-
                  <?php 
+                    $query = $pdo->query("SELECT * FROM mecanicos order by id desc ");
+                    $res = $query->fetchAll(PDO::FETCH_ASSOC);
 
-                 $query = $pdo->query("SELECT * FROM tesoureiros order by id desc ");
-                 $res = $query->fetchAll(PDO::FETCH_ASSOC);
+                    for ($i=0; $i < count($res); $i++) { 
+                    foreach ($res[$i] as $key => $value) {
+                    }
 
-                 for ($i=0; $i < count($res); $i++) { 
-                  foreach ($res[$i] as $key => $value) {
-                  }
-
-                  $nome = $res[$i]['nome'];
-                  $telefone = $res[$i]['telefone'];
-                  $email = $res[$i]['email'];
-                  $endereco = $res[$i]['endereco'];
-                  $cpf = $res[$i]['cpf'];
-                  $id = $res[$i]['id'];
-
-
+                    $nome = $res[$i]['nome'];
+                    $telefone = $res[$i]['telefone'];
+                    $email = $res[$i]['email'];
+                    $endereco = $res[$i]['endereco'];
+                    $cpf = $res[$i]['cpf'];
+                    $id = $res[$i]['id'];
                   ?>
-
-
-                  <tr>
+                <tr>
                     <td><?php echo $nome ?></td>
-                     <td><?php echo $telefone ?></td>
-                      <td><?php echo $email ?></td>
-                       <td><?php echo $cpf ?></td>
-
-
+                    <td><?php echo $telefone ?></td>
+                    <td><?php echo $email ?></td>
+                    <td><?php echo $cpf ?></td>
                     <td>
                        <a href="index.php?pag=<?php echo $pag ?>&funcao=editar&id=<?php echo $id ?>" class='text-primary mr-1' title='Editar Dados'><i class='far fa-edit'></i></a>
                        <a href="index.php?pag=<?php echo $pag ?>&funcao=excluir&id=<?php echo $id ?>" class='text-danger mr-1' title='Excluir Registro'><i class='far fa-trash-alt'></i></a>
 
                         <a href="index.php?pag=<?php echo $pag ?>&funcao=endereco&id=<?php echo $id ?>" class='text-info mr-1' title='Ver Endereço'><i class='fas fa-home'></i></a>
                    </td>
-               </tr>
-           <?php } ?>
+                </tr>
+                    <?php } ?>
 
-
-
-
-
-       </tbody>
-   </table>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
-</div>
-</div>
-
-
-
-
-
 <!-- Modal -->
 <div class="modal fade" id="modalDados" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <?php 
-                if (@$_GET['funcao'] == 'editar') {
-                    $titulo = "Editar Registro";
-                    $id2 = $_GET['id'];
+                    if (@$_GET['funcao'] == 'editar') {
+                        $titulo = "Editar Registro";
+                        $id2 = $_GET['id'];
 
-                    $query = $pdo->query("SELECT * FROM tesoureiros where id = '" . $id2 . "' ");
-                    $res = $query->fetchAll(PDO::FETCH_ASSOC);
+                        $query = $pdo->query("SELECT * FROM mecanicos where id = '" . $id2 . "' ");
+                        $res = $query->fetchAll(PDO::FETCH_ASSOC);
 
-                    $nome2 = $res[0]['nome'];
-                    $telefone2 = $res[0]['telefone'];
-                    $email2 = $res[0]['email'];
-                    $endereco2 = $res[0]['endereco'];
-                    $cpf2 = $res[0]['cpf'];
-
-
-
-                } else {
-                    $titulo = "Inserir Registro";
-
-                }
-
-
+                        $nome2 = $res[0]['nome'];
+                        $telefone2 = $res[0]['telefone'];
+                        $email2 = $res[0]['email'];
+                        $endereco2 = $res[0]['endereco'];
+                        $cpf2 = $res[0]['cpf'];
+                    } else {
+                        $titulo = "Inserir Registro";
+                    }
                 ?>
                 
                 <h5 class="modal-title" id="exampleModalLabel"><?php echo $titulo ?></h5>
@@ -149,24 +120,13 @@ if(@$_SESSION['id_usuario'] == null || @$_SESSION['nivel_usuario'] != 'Admin'){
                         <label >Endereço</label>
                         <input value="<?php echo @$endereco2 ?>" type="text" class="form-control" id="endereco" name="endereco" placeholder="Endereço">
                     </div>
-
-
-
-
                     <small>
                         <div id="mensagem">
 
                         </div>
                     </small> 
-
                 </div>
-
-
-
                 <div class="modal-footer">
-
-
-
                     <input value="<?php echo @$_GET['id'] ?>" type="hidden" name="txtid2" id="txtid2">
                     <input value="<?php echo @$cpf2 ?>" type="hidden" name="antigo" id="antigo">
                     <input value="<?php echo @$email2 ?>" type="hidden" name="antigo2" id="antigo2">
@@ -224,7 +184,7 @@ if(@$_SESSION['id_usuario'] == null || @$_SESSION['nivel_usuario'] != 'Admin'){
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Dados do Tesoureiro</h5>
+                <h5 class="modal-title">Dados do Mecanico</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -236,7 +196,7 @@ if(@$_SESSION['id_usuario'] == null || @$_SESSION['nivel_usuario'] != 'Admin'){
                     
                     $id2 = $_GET['id'];
 
-                    $query = $pdo->query("SELECT * FROM tesoureiros where id = '$id2' ");
+                    $query = $pdo->query("SELECT * FROM mecanicos where id = '$id2' ");
                     $res = $query->fetchAll(PDO::FETCH_ASSOC);
                     $nome3 = $res[0]['nome'];
                     $cpf3 = $res[0]['cpf'];

@@ -1,25 +1,19 @@
 <?php 
-$pag = "gestores";
-require_once("../connect.php"); 
+    $pag = "gestores";
+    require_once("../connect.php"); 
 
-@session_start();
-    //verificar se o usuário está autenticado
-if(@$_SESSION['id_usuario'] == null || @$_SESSION['nivel_usuario'] != 'Admin'){
-    echo "<script language='javascript'> window.location='../index.php' </script>";
+    @session_start();
+        //verificar se o usuário está autenticado
+    if(@$_SESSION['id_usuario'] == null || @$_SESSION['nivel_usuario'] != 'Admin'){
+        echo "<script language='javascript'> window.location='../index.php' </script>";
 
-}
-
-
+    }
 ?>
 
 <div class="row mt-4 mb-4">
-    <a type="button" class="btn-info btn-sm ml-3 d-none d-md-block" href="index.php?pag=<?php echo $pag ?>&funcao=novo">Novo Professor</a>
-    <a type="button" class="btn-info btn-sm ml-3 d-block d-sm-none" href="index.php?pag=<?php echo $pag ?>&funcao=novo">+</a>
-    
+    <a type="button" class="btn-info btn-sm ml-3 d-none d-md-block" href="index.php?pag=<?php echo $pag ?>&funcao=novo">Novo Gestor</a>
+    <a type="button" class="btn-info btn-sm ml-3 d-block d-sm-none" href="index.php?pag=<?php echo $pag ?>&funcao=novo">+</a>    
 </div>
-
-
-
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
 
@@ -76,48 +70,36 @@ if(@$_SESSION['id_usuario'] == null || @$_SESSION['nivel_usuario'] != 'Admin'){
                    </td>
                </tr>
            <?php } ?>
-
-
-
-
-
-       </tbody>
-   </table>
+            </tbody>
+        </table>
+    </div>
 </div>
 </div>
-</div>
-
-
-
-
-
 <!-- Modal -->
 <div class="modal fade" id="modalDados" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <?php 
-                if (@$_GET['funcao'] == 'editar') {
-                    $titulo = "Editar Registro";
-                    $id2 = $_GET['id'];
+                    if (@$_GET['funcao'] == 'editar') {
+                        $titulo = "Editar Registro";
+                        $id2 = $_GET['id'];
 
-                    $query = $pdo->query("SELECT * FROM gestores where id = '" . $id2 . "' ");
-                    $res = $query->fetchAll(PDO::FETCH_ASSOC);
+                        $query = $pdo->query("SELECT * FROM gestores where id = '" . $id2 . "' ");
+                        $res = $query->fetchAll(PDO::FETCH_ASSOC);
 
-                    $nome2 = $res[0]['nome'];
-                    $telefone2 = $res[0]['telefone'];
-                    $email2 = $res[0]['email'];
-                    $endereco2 = $res[0]['endereco'];
-                    $cpf2 = $res[0]['cpf'];
-                    $foto2 = $res[0]['foto'];
-
-
-                } else {
-                    $titulo = "Inserir Registro";
-
-                }
+                        $nome2 = $res[0]['nome'];
+                        $telefone2 = $res[0]['telefone'];
+                        $email2 = $res[0]['email'];
+                        $endereco2 = $res[0]['endereco'];
+                        $cpf2 = $res[0]['cpf'];
+                        $foto2 = $res[0]['foto'];
 
 
+                    } else {
+                        $titulo = "Inserir Registro";
+
+                    }
                 ?>
                 
                 <h5 class="modal-title" id="exampleModalLabel"><?php echo $titulo ?></h5>
@@ -151,10 +133,6 @@ if(@$_SESSION['id_usuario'] == null || @$_SESSION['nivel_usuario'] != 'Admin'){
                         </div>
                     </div>
 
-
-
-
-
                     <div class="form-group">
                         <label >Email</label>
                         <input value="<?php echo @$email2 ?>" type="text" class="form-control" id="email" name="email" placeholder="Email">
@@ -168,39 +146,27 @@ if(@$_SESSION['id_usuario'] == null || @$_SESSION['nivel_usuario'] != 'Admin'){
 
                 <div class="col-md-5">
                     <div class="form-group">
-                                <label >Imagem</label>
-                                <input type="file" value="<?php echo @$foto2 ?>"  class="form-control-file" id="imagem" name="imagem" onChange="carregarImg();">
-                            </div>
+                        <label >Imagem</label>
+                        <input type="file" value="<?php echo @$foto2 ?>"  class="form-control-file" id="imagem" name="imagem" onChange="carregarImg();">
+                    </div>
 
-                            <div id="divImgConta">
-                            <?php if(@$foto2 != ""){ ?>
-                                <img src="../img/gestores/<?php echo $foto2 ?>" width="200" height="200" id="target">
-                            <?php  }else{ ?>
-                                <img src="../img/gestores/sem-foto.jpg" width="200" height="200" id="target">
-                            <?php } ?>
-                            </div>
+                    <div id="divImgConta">
+                        <?php if(@$foto2 != ""){ ?>
+                            <img src="../img/gestores/<?php echo $foto2 ?>" width="200" height="200" id="target">
+                        <?php  }else{ ?>
+                            <img src="../img/gestores/sem-foto.jpg" width="200" height="200" id="target">
+                        <?php } ?>
+                    </div>
                 </div>
             </div>
-
-
-
-
-
 
             <small>
                 <div id="mensagem">
 
                 </div>
             </small> 
-
         </div>
-
-
-
         <div class="modal-footer">
-
-
-
             <input value="<?php echo @$_GET['id'] ?>" type="hidden" name="txtid2" id="txtid2">
             <input value="<?php echo @$cpf2 ?>" type="hidden" name="antigo" id="antigo">
             <input value="<?php echo @$email2 ?>" type="hidden" name="antigo2" id="antigo2">

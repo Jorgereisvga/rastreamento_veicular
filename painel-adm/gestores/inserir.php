@@ -28,7 +28,7 @@ if($cpf == ""){
 
 //VERIFICAR SE O REGISTRO JÁ EXISTE NO BANCO
 if($antigo != $cpf){
-	$query = $pdo->query("SELECT * FROM professores where cpf = '$cpf' ");
+	$query = $pdo->query("SELECT * FROM gestores where cpf = '$cpf' ");
 	$res = $query->fetchAll(PDO::FETCH_ASSOC);
 	$total_reg = @count($res);
 	if($total_reg > 0){
@@ -40,7 +40,7 @@ if($antigo != $cpf){
 
 //VERIFICAR SE O REGISTRO COM MESMO EMAIL JÁ EXISTE NO BANCO
 if($antigo2 != $email){
-	$query = $pdo->query("SELECT * FROM professores where email = '$email' ");
+	$query = $pdo->query("SELECT * FROM gestores where email = '$email' ");
 	$res = $query->fetchAll(PDO::FETCH_ASSOC);
 	$total_reg = @count($res);
 	if($total_reg > 0){
@@ -53,7 +53,7 @@ if($antigo2 != $email){
 
 //SCRIPT PARA SUBIR FOTO NO BANCO
 $nome_img = preg_replace('/[ -]+/' , '-' , @$_FILES['imagem']['name']);
-$caminho = '../../img/professores/' .$nome_img;
+$caminho = '../../img/gestores/' .$nome_img;
 if (@$_FILES['imagem']['name'] == ""){
   $imagem = "sem-foto.jpg";
 }else{
@@ -71,17 +71,17 @@ move_uploaded_file($imagem_temp, $caminho);
 
 
 if($id == ""){
-	$res = $pdo->prepare("INSERT INTO professores SET nome = :nome, cpf = :cpf, email = :email, endereco = :endereco, telefone = :telefone, foto = '$imagem'");	
+	$res = $pdo->prepare("INSERT INTO gestores SET nome = :nome, cpf = :cpf, email = :email, endereco = :endereco, telefone = :telefone, foto = '$imagem'");	
 
 	$res2 = $pdo->prepare("INSERT INTO usuarios SET nome = :nome, cpf = :cpf, email = :email, senha = :senha, nivel = :nivel");	
 	$res2->bindValue(":senha", '123');
-	$res2->bindValue(":nivel", 'professor');
+	$res2->bindValue(":nivel", 'gestor');
 
 }else{
 	if($imagem == "sem-foto.jpg"){
-		$res = $pdo->prepare("UPDATE professores SET nome = :nome, cpf = :cpf, email = :email, endereco = :endereco, telefone = :telefone WHERE id = '$id'");
+		$res = $pdo->prepare("UPDATE gestores SET nome = :nome, cpf = :cpf, email = :email, endereco = :endereco, telefone = :telefone WHERE id = '$id'");
 	}else{
-		$res = $pdo->prepare("UPDATE professores SET nome = :nome, cpf = :cpf, email = :email, endereco = :endereco, telefone = :telefone, foto = '$imagem' WHERE id = '$id'");
+		$res = $pdo->prepare("UPDATE gestores SET nome = :nome, cpf = :cpf, email = :email, endereco = :endereco, telefone = :telefone, foto = '$imagem' WHERE id = '$id'");
 	}
 	
 
