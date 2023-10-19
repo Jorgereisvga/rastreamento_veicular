@@ -1,5 +1,5 @@
 <?php 
-$pag = "secretarios";
+$pag = "motoristas";
 require_once("../conexao.php"); 
 
 @session_start();
@@ -40,7 +40,7 @@ if(@$_SESSION['id_usuario'] == null || @$_SESSION['nivel_usuario'] != 'Admin'){
 
                  <?php 
 
-                 $query = $pdo->query("SELECT * FROM secretarios order by id desc ");
+                 $query = $pdo->query("SELECT * FROM motoristas order by id desc ");
                  $res = $query->fetchAll(PDO::FETCH_ASSOC);
 
                  for ($i=0; $i < count($res); $i++) { 
@@ -98,7 +98,7 @@ if(@$_SESSION['id_usuario'] == null || @$_SESSION['nivel_usuario'] != 'Admin'){
                     $titulo = "Editar Registro";
                     $id2 = $_GET['id'];
 
-                    $query = $pdo->query("SELECT * FROM secretarios where id = '" . $id2 . "' ");
+                    $query = $pdo->query("SELECT * FROM motoristas where id = '" . $id2 . "' ");
                     $res = $query->fetchAll(PDO::FETCH_ASSOC);
 
                     $nome2 = $res[0]['nome'];
@@ -124,6 +124,7 @@ if(@$_SESSION['id_usuario'] == null || @$_SESSION['nivel_usuario'] != 'Admin'){
             </div>
             <form id="form" method="POST">
                 <div class="modal-body">
+                
 
                     <div class="form-group">
                         <label >Nome</label>
@@ -236,7 +237,7 @@ if(@$_SESSION['id_usuario'] == null || @$_SESSION['nivel_usuario'] != 'Admin'){
                     
                     $id2 = $_GET['id'];
 
-                    $query = $pdo->query("SELECT * FROM secretarios where id = '$id2' ");
+                    $query = $pdo->query("SELECT * FROM motoristas where id = '$id2' ");
                     $res = $query->fetchAll(PDO::FETCH_ASSOC);
                     $nome3 = $res[0]['nome'];
                     $cpf3 = $res[0]['cpf'];

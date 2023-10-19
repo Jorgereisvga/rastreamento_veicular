@@ -11,6 +11,6 @@ $rodape_relatorios = "Desenvolvido por Jorge Reis - Web Developer Full Stack";
 $servidor = 'localhost';
 $usuario = 'root';
 $senha = '';
-$banco = 'escolar';
+$banco = 'rastreamento';
 
  ?>
